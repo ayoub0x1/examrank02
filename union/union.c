@@ -3,42 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   union.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macbook <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aymoulou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/21 20:15:32 by macbook           #+#    #+#             */
-/*   Updated: 2021/11/24 21:46:44 by macbook          ###   ########.fr       */
+/*   Created: 2021/11/27 18:06:04 by aymoulou          #+#    #+#             */
+/*   Updated: 2021/11/27 18:21:03 by aymoulou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	main(int argc, char **argv)
+void	ft_putchar(char c)
 {
-	int	used[255];
-	int	i, j;
-
-	if (argc == 3)
-	{
-		i = 0;
-		while (i < 255)
-			used[i++] = 0;
-		i = 1;
-		while (i < 3)
-		{
-			j = 0;
-			while (argv[i][j])
-			{
-				if (!used[(unsigned char)argv[i][j]])
-				{
-					used[(unsigned char)argv[i][j]] = 1;
-					write(1, &argv[i][j], 1);
-				}
-				j++;
-			}
-			i++;
-		}
-	}
-	write(1, "\n", 1);
-	return (0);
+	write(1,&c,1);
 }
 
+int	main(int ac, char **av)
+{
+	if (ac != 3)
+	{
+		ft_putchar('\n');
+		return (0);
+	}
+	char	used[256] = {0};
+
+	char	*s1 = av[1];
+   	char 	*s2 = av[2];
+	while (*s1)
+	{
+		if (used[*s1] == 0)
+		{
+			ft_putchar(*s1);
+			used[*s1]++;
+		}
+		s1++;
+	}
+	while (*s2)
+	{
+		if (used[*s2] == 0)
+		{
+			ft_putchar(*s2);
+			used[*s2]++;
+		}
+		s2++;
+	}
+	ft_putchar('\n');
+}
